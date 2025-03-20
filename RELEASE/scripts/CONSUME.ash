@@ -118,6 +118,10 @@ float get_value(DietAction da)
 		}
 	}
 
+	if (da.organ < ORGAN_NONE) {
+		value = value / da.space;
+	}
+
 	return value;
 }
 
