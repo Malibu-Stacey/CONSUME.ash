@@ -85,7 +85,11 @@ Range get_adventures(DietAction da)
 float get_value(DietAction da)
 {
 	Range advs = da.get_adventures();
-	float value = advs.average() * ADV_VALUE + da.it.get_fites() * PVP_VALUE + da.it.get_drippiness() * DRIP_VALUE;
+	float organAdvs = advs.average();
+	if (da.organ < ORGAN_NONE) {
+		organAdvs = organAdvs / da.space;
+	}
+	float value = organAdvs * ADV_VALUE + da.it.get_fites() * PVP_VALUE + da.it.get_drippiness() * DRIP_VALUE;
 	if(da.it != $item[none])
 		value -= da.it.item_price();
 	foreach i,tool in da.tools
@@ -116,10 +120,6 @@ float get_value(DietAction da)
 				default: print("Something bad happened."); break;
 			}
 		}
-	}
-
-	if (da.organ < ORGAN_NONE) {
-		value = value / da.space;
 	}
 
 	return value;
