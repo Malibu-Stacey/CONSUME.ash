@@ -421,13 +421,13 @@ int total_synthesis_turns(Diet d)
 	return turns;
 }
 
-float get_value(DietAction da);
+float get_basic_value(DietAction da);
 
 float total_profit(Diet d)
 {
 	float profit = 0;
 	foreach i,da in d.actions
-		profit += da.get_value();
+		profit += da.get_basic_value();
 	return profit;
 }
 

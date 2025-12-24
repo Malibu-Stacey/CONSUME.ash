@@ -105,6 +105,10 @@ int item_price(item it)
 		case $item[distention pill]:
 		case $item[synthetic dog hair pill]:
 			return 2 * ADV_VALUE + 0.5 * item_price($item[transporter transponder]);
+		case $item[mafia pinky ring]:
+			if(available_amount($item[mafia pinky ring]) > 0)
+				return 0;
+			break;
 	}
 
 	int price = it.mall_price();

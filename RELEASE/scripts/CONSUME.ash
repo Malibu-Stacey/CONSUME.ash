@@ -85,7 +85,7 @@ Range get_adventures(DietAction da)
 	return advs;
 }
 
-float get_value(DietAction da)
+float get_basic_value(DietAction da)
 {
 	Range advs = da.get_adventures();
 	float value = advs.average() * ADV_VALUE + da.it.get_fites() * PVP_VALUE + da.it.get_drippiness() * DRIP_VALUE;
@@ -106,6 +106,13 @@ float get_value(DietAction da)
 	}
 	else if(da.sk == $skill[Ancestral Recall])
 		value -= $item[blue mana].item_price();
+
+	return value;
+}
+
+float get_value(DietAction da)
+{
+	float value = get_basic_value(da);
 
 	if(firstPassComplete)
 	{
@@ -1287,7 +1294,7 @@ void print_diet(Diet d)
 	int cost = d.total_cost();
 	print("This should cost roughly " + cost.format() + " meat");
 	Range advs = d.total_adventures();
-	print("Adventure yield should be roughly " + advs.to_string());
+	print("Adventure yield should be roughly " + advs.to_string() + " (average " + advs.average() + ")");
 	int fites = d.total_fites();
 	if(fites > 0)
 		print("PvP Fight yield should be " + fites.to_string());
@@ -1297,7 +1304,7 @@ void print_diet(Diet d)
 	int profit = d.total_profit();
 	print("That's an average profit of " + profit.format());
 	profit += my_adventures() * ADV_VALUE;
-	print("Including adventures you already have, you should profit " + profit.format() + " today");
+	print("Including the " + my_adventures() + " adventures you already have, you should profit " + profit.format() + " today");
 	OrganSpace space = d.total_space();
 	print("In total, you're filling up " + space.fullness + " fullness, " +
 		space.inebriety + " liver, and " + space.spleen + " spleen");
