@@ -312,12 +312,8 @@ void evaluate_consumables()
 	}
 	if(!haveSearched)
 	{
-		print("Looking up the prices of food", "blue");
-		mall_prices("food", "crappy, decent, good, awesome, EPIC");
-		print("Looking up the prices of booze", "blue");
-		mall_prices("booze", "crappy, decent, good, awesome, EPIC");
-		print("Looking up the price of " + lookups.count() + " other items", "blue");
-		mall_prices(lookups);
+		print("Looking up the prices of everything why not", "blue");
+		mall_prices("allitems");
 		haveSearched = true;
 	}
 
