@@ -7,7 +7,6 @@ import <CONSUME/CONSTANTS.ash>
 import <CONSUME/RECORDS.ash>
 import <CONSUME/HELPERS.ash>
 
-static boolean haveSearched = false;
 boolean havePinkyRing = available_amount($item[mafia pinky ring]) > 0;
 boolean haveTuxedoShirt = available_amount($item[tuxedo shirt]) > 0;
 int songDuration = my_accordion_buff_duration();
@@ -310,12 +309,8 @@ void evaluate_consumables()
 			}
 		}
 	}
-	if(!haveSearched)
-	{
-		print("Looking up the prices of everything why not", "blue");
-		mall_prices("allitems");
-		haveSearched = true;
-	}
+
+	cli_execute("mallcheck.js");
 
 	foreach i,c in food
 		evaluate_consumable(c);
@@ -1405,7 +1400,8 @@ void main(string command)
 				}
 				break;
 			case "REFRESH":
-				haveSearched = false;
+				print("Refreshing item prices manually", "blue");
+				mall_prices("allitems");
 				break;
 			case "ALLOWLIFETIMELIMITED":
 				allow_lifetime_limited();
@@ -1424,7 +1420,7 @@ void main(string command)
 				print("VALUE X - Treat valueOfAdventure as X for this run.");
 				print("VALUEPVP X - Treat CONSUME.PVPVAL as X for this run.");
 				print("VALUEDRIP X - Treat CONSUME.DRIPVAL as X for this run.");
-				print("REFRESH - Check mall prices for food and booze again this run.");
+				print("REFRESH - Check mall prices for consumables again this run (WILL CHECK TWICE IF USED ON FIRST RUN OF THE DAY).");
 				print("CONSUME.ash Settings:", "blue");
 				print('You can change these settings by typing "set SETTING=VALUE" in the gCLI.');
 				print("valueOfAdventure - Technically a mafia property, not a CONSUME property, " +
