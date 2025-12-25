@@ -497,7 +497,7 @@ boolean has_unseasoned(Diet d)
 				break;
 			}
 		}
-		if(!isSeasoned)
+		if(!isSeasoned && da.organ == ORGAN_STOMACHE)
 			return true;
 	}
 	return false;
