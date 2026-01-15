@@ -263,6 +263,16 @@ boolean is_bloody(item it)
 	return it.notes.contains_text("Vampyre");
 }
 
+boolean has_u(item it)
+{
+	return it.name.to_lower_case().contains_text("u");
+}
+
+boolean has_i(item it)
+{
+	return it.name.to_lower_case().contains_text("i");
+}
+
 boolean is_unwanted_text_effect(effect ef)
 {
 	return $effects[
