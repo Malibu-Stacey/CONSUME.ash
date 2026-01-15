@@ -284,6 +284,9 @@ void evaluate_consumables()
 		if((it.is_bloody() != (my_class() == $class[Vampyre])) && (c.organ == ORGAN_STOMACHE || c.organ == ORGAN_LIVER))
 			continue;
 
+		if (it.has_u() && my_path() == $path[11 Things I Hate About U] && c.organ == ORGAN_STOMACHE) // food with u's in the name can't be eaten in this path
+			continue;
+
 		float advs_per_space = c.it.get_adventures().average() / c.space;
 		float fites_per_space = c.it.get_fites().to_float() / c.space;
 		float drip_per_space = c.it.get_drippiness().to_float() / c.space;
